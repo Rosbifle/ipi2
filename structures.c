@@ -20,6 +20,15 @@ typedef struct {
     tuile* deck;
 } hand;
 
+typedef struct action{
+	tuile tuile;
+	int x;
+	int y;
+	int orientation;
+	struct action * next;
+}
+
+
 /* prend en argument une taille, renvoie un malloc n*n de cellules*/
 grille init_grid_empy(int sz){
     grille g;
