@@ -3,19 +3,16 @@
 #include <time.h>
 
 enum rot {rot_0, rot_90, rot_180, rot_270};
-typedef struct {
-    char id;
- } cell ;
 
-typedef struct prout{
+typedef struct{
     int id;
     int orientation;
-    cell c[6];
+    char terrains[6];
 } tuile;
 
 typedef struct {
     int sz;
-    cell** grid;
+    char** grid;
 } grille;
 
 typedef struct {
@@ -27,13 +24,13 @@ typedef struct {
 grille init_grid_empy(int sz){
     grille g;
     g.sz=sz;
-    g.grid=(cell**)malloc(sz*sizeof(cell*));
+    g.grid=(char**)malloc(sz*sizeof(char*));
     int i;
     int j;
     for(i=0;i<sz;i++){
-        g.grid[i]=(cell*)malloc(sz*sizeof(cell));
+        g.grid[i]=(char*)malloc(sz*sizeof(char));
         for(j=0;j<sz;j++){
-            g.grid[i][j].id='v';
+            g.grid[i][j]='v';
         }
     }
     return g;
@@ -55,8 +52,8 @@ tuile tuile_random(){
     int l[6]={102, 108, 112, 114, 117, 118};
     tuile t;
     int i;
-    for(i;i<6;i++){
-        t.c[i].id=(char)l[randint(6)];
+    for(i=0;i<6;i++){
+        t.terrains[i]=(char)l[randint(6)];
     }
     return t;
 }
@@ -67,7 +64,7 @@ hand init_hand(int n){
     h.sz=n;
     h.deck=(tuile*)malloc(n*sizeof(tuile));
     int i;
-    for(i;i<h.sz;i++){
+    for(i=0;i<h.sz;i++){
         h.deck[i]=tuile_random();
     }
     return h;
@@ -75,6 +72,14 @@ hand init_hand(int n){
 
 int main(){
     srand(time(NULL));
-    printf("%i, %i, %i, %i, %i, %i", 'p', 'v', 'u', 'l', 'f', 'r');
+    hand h=init_hand(4);
+    int i;
+    int j;
+    for(i=0;i<4;i++){
+        for(j=0;j<6;j++){
+            printf("%c ",h.deck[i].terrains[j]);
+        }
+        printf("\n");
+    }
     return 0;
 }
