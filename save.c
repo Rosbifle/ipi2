@@ -1,24 +1,63 @@
 #include <structures.h>
 
-/* Proposition d'ecriture du fichier */
+/* ecriture du fichier */
 /* 
 taille_grille
 //tuiles en main
-1: tuile.toString val1;val2
-2: tuile.toString 
+1val1;val2;...
+2val1;val2;...
 ...
-//historique posage de tuiles (à développer) //ptet creer un struct action qui est en fait un {tuile; coordonnée;} et faire historique est un action[12], il n'y a que 12 tours.
-0 tuile.toString:coordonee1:coordonee2 //celle la est la tuile initiale.
-1 tuile.toString:...
-2 tuile.toString:... 
-... pour chaque tour
-après pour la relecture il suffit de prendre une grille vide et d'insérer les tuiles 
+// historique
+1val1;val2;...:coord1:coord2
+2val1;val2;...:coord1:coord2
+...
 */
+/**
+render a tuile to string as val1;val2;val3;...
+@returns: the string of tuile  t
+*/
+char * tuile_toString(tuile t){
+	int i;
+	char str[11] = tuile.terrains[0];
+	for(i = 1; i < 6; i ++){
+		strcat(str, ";");
+		strcat(str, tuile.terrains[i]);
+	}
+	return str;
+}
+/**
+Saves the game in saveHonshu.txt
+@assigns: nothing
+@returns: 0 if ok 1 if error
+*/
+
+int save(action historique, hand main){
+	FILE *f = fopen("saveHonshu.txt", "w");
+	char * main, histo;
+	if (f == NULL)
+	{
+	    printf("Error opening file!\n");
+	    exit(1);
+	}
+	//print size
+	fprintf(f, "%d\n", historique.sz);
+	//print hand
+	for(i = 0; i < main.sz; i ++){
+		fprintf(f, "%d%s\n", i, tuile_toString(main.deck[i]));
+	}
+	// print histo
+	while(historique != NULL){
+		fprintf(f, "%d%s:%d:%d\n", i, tuile_toString(historique.tuile), historique.x, historique.y);
+		historique = historique.next;
+	}
+	return 0;
+	fclose(f);
+}
 
 /**
 loads the game saved in saveHonshu.txt.
 @returns The story of the loaded game.
-@assigns main: the hand of the player during the loaded game.
+@assigns: main: the hand of the player during the loaded game.
 
 */
 
@@ -50,7 +89,7 @@ action load(hand * main){
 		fscanf(f, "%d:%c;%c;%c;%c;%c;%c:%d:%d",
 			&pose.orientation, &pose.terrains[0], &pose.terrains[1], &pose.terrains[3],
 			&pose.terrains[4], &pose.terrains[5], &pose.terrains[6], &coord[0], &coord[1]);
-		insert(grid, tuile, coord);
+		action_add(grid, tuile, coord);
 	}
 
 }
