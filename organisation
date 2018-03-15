@@ -1,0 +1,81 @@
+/* Le main */
+//Initialisation
+demander s'il veut load ou jouer une nouvelle partie.
+if load { load; goto Vrai jeu}
+else {
+Distribuer main					//cf struct
+création de l'historique		//cf struct
+creer grille					// CF struct	
+jouer(tuile centrale, centre)	// CF Jouer
+}
+
+// Vrai Jeu
+Tant que la main n'est pas vide{
+Demander ce que veut le joueur:
+	Show grid
+	jouer
+	Retirer derniere tuile
+	SAVE
+	show hand
+	(calculer score actuel)
+}
+
+//fonctions impliquées
+
+-les différents constructeurs, je vous épargne
+l4: load(*grid, *histo, *main)
+	lit dans un fichier: main, histo et size
+	et recrée la grid à partir de ça. cf jouer2() l42
+l6: distrib{
+	creer un tableau/pile de 12 random tuiles
+}
+l9: jouer (Action play, Historique histo, Grille grid){
+	divers test if play possible
+	append(histo, play) #constructeur
+	ajout_tuile_grille(play, grid)
+}
+l17: Retirer(grid, histo)
+	si ce n'est pas la premiere tuile
+	pop(histo) # constructeur
+	empty_grid(grid) // sur une grille vide de taille de grid
+	for action in histo
+		jouer2(action, grid) // difference avec jouer c'est qu'il faut pas append histo, voire creer une fct qui joue toutes les actions d'un histo d'un coup.
+l18: save(size, main, histo)
+	enregistre size main et histo dans un fichier.
+l35: ajout_tuile_grille(play, grid){
+		si lateral
+		for j < 3
+			for i < 2
+				grille[j][i] = tuile[i*3+j]
+		si horizontal
+			for j < 3
+				for i < 2
+				grille[i][j] = tuile[i*3+j]
+		// vous allez me dire "mais nujaaaa ya que 2 cas!" est ce que ça m'interesse? il nous suffit de definir une version de base pour chaque latéralité et de faire une rotation de 3 dans les indices si on a une rotation de 180°.
+}
+l40: empt_grid(grid)
+		grid = '/terrainVide' partout // je pense qu'il est plus intelligent de le free et en réalloc une
+	
+
+// Structures impliquées
+Tuile { char val[6] const}
+
+Hand {
+	int size;
+	Tuile tab[size] // dynamic}
+
+Action {
+	Tuile shrunk;
+	int coord[2];
+	int orientation;
+}
+
+Grille {
+	int size[2];
+	char [size[0]][size[1]] const
+}
+
+Historique{Action Play;
+			Historique * prev || next}
+
+
