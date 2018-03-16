@@ -65,7 +65,7 @@ Hand {
 	Tuile tab[size] // dynamic}
 
 Action {
-	Tuile shrunk;
+	Tuile t;
 	int coord[2];
 	int orientation;
 }
@@ -75,7 +75,8 @@ Grille {
 	char [size[0]][size[1]] const
 }
 
-Historique{Action Play;
-			Historique * prev || next}
+Historique{
+	Action Play;
+	Historique* next}
 
 
