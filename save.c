@@ -18,11 +18,9 @@ render a tuile to string as val1;val2;val3;...
 */
 char * tuile_toString(tuile t){
 	int i;
-	char str[11] = tuile.terrains[0];
-	for(i = 1; i < 6; i ++){
-		strcat(str, ";");
-		strcat(str, tuile.terrains[i]);
-	}
+	char str[11];
+	sprintf(str, %c;%c;%c;%c;%c;%c, tuile.terrains[0], tuile.terrains[1], 
+		tuile.terrains[2], tuile.terrains[3],  tuile.terrains[4], tuile.terrains[5]
 	return str;
 }
 /**
@@ -70,12 +68,13 @@ action load(hand * main){
 	// reading hand
 	for(i = 0; i < 12; i ++){
 		fscanf(f, "%d", &test);
-		if(test != i + 1){ //c-a-d qu'on arrive a l'historique du
+		if(test != i){ //c-a-d qu'on arrive a l'historique du
 			break;
 		}
-		//read en expression réguliere en fonction de tuile.toString pour le moment: orientation:v1;v2;v3;v4;v5;v6:c1:c2
-		fscanf(f, "%d %c;%c;%c;%c;%c;%c", main.tuile[i].orientation, main.tuile[i]->val[0], main.tuile[i]->val[1], main.tuile[2],
-				main.tuile->val[3], main.tuile[i]->val[4], main.tuile[i]->val[5], main.tuile[i]->val[6]);
+		//read en expression réguliere en fonction de tuile.toString : v1;v2;v3;v4;v5;v6:c1:c2
+		fscanf(f, "%c;%c;%c;%c;%c;%c", main.tuile[i]->val[0], main.tuile[i]->val[1], 
+				main.tuile[2], main.tuile->val[3], main.tuile[i]->val[4], 
+				main.tuile[i]->val[5], main.tuile[i]->val[6]);
 	}
 	main -> sz = i + 1;
 	//reading historique
@@ -86,10 +85,10 @@ action load(hand * main){
 		if(test != i){ //c-a-d qu'on arrive a la fin de l'historique soit la fin du fichier save
 			break;
 		}
-		fscanf(f, "%d:%c;%c;%c;%c;%c;%c:%d:%d",
-			&pose.orientation, &pose.terrains[0], &pose.terrains[1], &pose.terrains[3],
-			&pose.terrains[4], &pose.terrains[5], &pose.terrains[6], &coord[0], &coord[1]);
-		action_add(grid, tuile, coord);
+		fscanf(f, "%c;%c;%c;%c;%c;%c:%d:%d",
+			pose.terrains[0], &pose.terrains[1], &pose.terrains[3],
+			&pose.terrains[4], &pose.terrains[5], &pose.terrains[6], coord[0], coord[1]);
+		pose_tuile(grid, tuile, coord);
 	}
 
 }
