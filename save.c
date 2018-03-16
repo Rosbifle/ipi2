@@ -44,9 +44,12 @@ int save(action historique, hand main){
 		fprintf(f, "%d%s\n", i, tuile_toString(main.deck[i]));
 	}
 	// print histo
+	i = 0;
 	while(historique != NULL){
-		fprintf(f, "%d%s:%d:%d\n", i, tuile_toString(historique.tuile), historique.x, historique.y);
+		fprintf(f, "%d %d%s:%d:%d\n", i, historique.Play.orientation, tuile_toString(historique.tuile),
+			historique.Play.coord[0], historique.Play.coord[1]);
 		historique = historique.next;
+		i ++;
 	}
 	return 0;
 	fclose(f);
@@ -59,12 +62,13 @@ loads the game saved in saveHonshu.txt.
 
 */
 
-action load(hand * main){
+historique load(hand * main){
 	int i, test, dropped, coord[2];
-	action grid = grille();
+	grille grid;
 	FILE *f = fopen("saveHonshu.txt", "r");
 	//reading size
 	fscanf(f, "%d", &grid.size);
+	//alloc_grille(grid) <-- alloc la taille de la grille.
 	// reading hand
 	for(i = 0; i < 12; i ++){
 		fscanf(f, "%d", &test);
@@ -79,16 +83,19 @@ action load(hand * main){
 	main -> sz = i + 1;
 	//reading historique
 	dropped = 13 - i; // il y a la tuile de départ + 12 - i tuiles posées.
+	action a;
 	tuile pose = tuile();
 	for(i = 0; i < dropped; i ++){
-		fscanf(f, "%d", test);
+		fscanf(f, "%d ", test);
 		if(test != i){ //c-a-d qu'on arrive a la fin de l'historique soit la fin du fichier save
 			break;
 		}
-		fscanf(f, "%c;%c;%c;%c;%c;%c:%d:%d",
+		fscanf(f, "%d:%c;%c;%c;%c;%c;%c:%d:%d", a.orientation,
 			pose.terrains[0], &pose.terrains[1], &pose.terrains[3],
 			&pose.terrains[4], &pose.terrains[5], &pose.terrains[6], coord[0], coord[1]);
-		pose_tuile(grid, tuile, coord);
+		a.t = pose;
+		a.coord = coord;
+		pose_tuile(grid, a);
 	}
 
 }
