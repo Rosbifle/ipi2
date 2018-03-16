@@ -30,6 +30,11 @@ typedef struct {
     tuile* deck;
 } hand;
 
+typedef struct Historique{
+	action Play;
+	struct Historique * next;
+} Historique;
+
 void lib_grille(grille* g);
 tuile tuile_random();
 hand init_hand(int n);
