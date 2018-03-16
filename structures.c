@@ -1,36 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "structures.h"
 
-enum rot {rot_0, rot_90, rot_180, rot_270};
+enum pos {rot_0, rot_90, rot_180, rot_270};
 
-typedef struct{
-    int id;
-    int orientation;
-    char terrains[6];
-} tuile;
-
-typedef struct {
-    int sz;
-    char** grid;
-} grille;
-
-typedef struct {
-    int sz;
-    tuile* deck;
-} hand;
-
-typedef struct action{
-	tuile tuile;
-	int x;
-	int y;
-	int orientation;
-	struct action * next;
-}
-
-
-/* prend en argument une taille, renvoie un malloc n*n de cellules*/
-grille init_grid_empy(int sz){
+/* prend en argument une taille, renvoie un malloc n*n de char*/
+grille init_grid(int sz){
     grille g;
     g.sz=sz;
     g.grid=(char**)malloc(sz*sizeof(char*));
@@ -42,6 +18,7 @@ grille init_grid_empy(int sz){
             g.grid[i][j]='v';
         }
     }
+    pose_tuile(&g, tuile_random(), (sz-1)/2-1, (sz-1)/2-1);
     return g;
 }
 
