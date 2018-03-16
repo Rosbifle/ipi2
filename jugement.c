@@ -45,7 +45,7 @@ int village_ville(grille g){
 						    }
 						}
 					}
-				}//jie shu yi ge dian
+				}/*jie shu yi ge dian*/
 				if(nombre > taille){
 					taille = nombre;
 				}

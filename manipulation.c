@@ -15,8 +15,8 @@ void rot_tuile(tuile* t, int orient){
 void action_add(tuile t, int x, int y, action* historique){
     action pose;
     pose.tuile=t;
-    pose.x=x;
-    pose.y=y;
+    pose.coord[0]=x;
+    pose.coord[1]=y;
     pose.next=NULL;
     historique->next=&pose;
     return;
