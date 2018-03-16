@@ -1,5 +1,5 @@
 #include"manipulation.h"
-
+#include"structures.h"
 
 /*retourne type de terrain d'une case*/
 int read_terrain(int x, int y){
@@ -62,3 +62,6 @@ int pose_tuile(grille* g, tuile t, int x, int y, action* historique){
     return 1;
     
 }
+
+
+
