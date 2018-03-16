@@ -1,12 +1,5 @@
-//sur structures.h
-#define bool int
-#define true 1
-#define false 0
-//sur structures.h
+#include"structures.h"
 
-#include<structures.h>
-
-// 判断是否超界
 bool test_zone_limite(action ac, grille g){
 	if（ac.orientation == rot_0 || ac.orientation == rot_180）{
 		if(ac.x + 1 <= g.sz - 1 && ac.y + 2 <= g.sz - 1) return true;
@@ -20,14 +13,14 @@ bool test_zone_limite(action ac, grille g){
 
 }
 
-//判断城镇大小
 int village_ville(grille g){
 	int taille = 0;
+	int i, j;
 	for(i = 0; i < g.sz; i++){
 		for(j = 0; j< g.sz; j++){
-			grille gr = init_grid_empy(g.sz);
+			grille gr = init_grid(g.sz);
 			int sz = gr.sz;
-			int nombre = 0;//lin shi bian liang, dai biao mei yi ci de taille
+			int nombre = 0;/*lin shi bian liang, dai biao mei yi ci de taille*/
 			if(gr.grid[i][j] == 'v'){
 				gr.grid[i][j] = '0';
 				nombre++;
