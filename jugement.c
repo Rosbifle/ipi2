@@ -26,7 +26,7 @@ int village_ville(grille g){
 				nombre++;
 				for(i = 0; i < sz; i++){
 					for(j = 0; j< sz; j++){
-						if(gr.grid[i][j] = '0'){
+						if(gr.grid[i][j] == '0'){
 							if(gr.grid[i+1][j] == 'v'){  
 						       gr.grid[i+1][j] = '0';
 							   nombre++;   
