@@ -5,7 +5,7 @@ bool test_zone_limite(action ac, grille g){
 		if(ac.coord[0] + 1 <= g.sz - 1 && ac.coord[1] + 2 <= g.sz - 1) return true;
 		else return false;
 	}
-	else if(ac.orientation == rot_90 || ac.orientation == rot_270)){
+	else if(ac.orientation == rot_90 || ac.orientation == rot_270){
 		if(ac.coord[0] + 2 <= g.sz - 1 && ac.coord[1] + 1 <= g.sz - 1) return true;
 		else return false;
 	}
