@@ -30,9 +30,10 @@ typedef struct {
     tuile* deck;
 } hand;
 
-typedef struct Historique{
-	action Play;
-	struct Historique * next;
+typedef struct historique* hlist;
+struct Historique{
+  action Play;
+  hlist next;
 } historique;
 
 void lib_grille(grille* g);
