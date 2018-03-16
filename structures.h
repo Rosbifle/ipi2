@@ -40,3 +40,5 @@ tuile tuile_random();
 hand init_hand(int n);
 void pose_tuile(grille* g, tuile t, int x, int y);
 grille init_grid(int sz);
+bool test_zone_limite(action ac, grille g);
+int village_ville(grille g);
