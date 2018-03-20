@@ -1,5 +1,40 @@
-#include <structures.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
+enum pos {rot_0, rot_90, rot_180, rot_270};
+
+#define bool int
+#define true 1
+#define false 0
+
+typedef struct{
+    int id;
+    int orientation;
+    char terrains[6];
+} tuile;
+
+typedef struct {
+	tuile t;
+	int coord[2];
+	int orientation;
+} action;
+
+typedef struct {
+    int sz;
+    char** grid;
+} grille;
+
+typedef struct {
+    int sz;
+    tuile* deck;
+} hand;
+
+struct Historique{
+  action Play;
+  struct Historique * next;
+} historique;
+typedef struct Historique hlist;
 /* ecriture du fichier */
 /* 
 taille_grille
@@ -17,10 +52,9 @@ render a tuile to string as val1;val2;val3;...
 @returns: the string of tuile  t
 */
 char * tuile_toString(tuile t){
-	int i;
-	char str[11];
-	sprintf(str, %c;%c;%c;%c;%c;%c, tuile.terrains[0], tuile.terrains[1], 
-		tuile.terrains[2], tuile.terrains[3],  tuile.terrains[4], tuile.terrains[5]
+	char * str = malloc(11*sizeof(char));
+	sprintf(str, "%c;%c;%c;%c;%c;%c", t.terrains[0], t.terrains[1], 
+		t.terrains[2], t.terrains[3],  t.terrains[4], t.terrains[5]);
 	return str;
 }
 /**
@@ -29,26 +63,26 @@ Saves the game in saveHonshu.txt
 @returns: 0 if ok 1 if error
 */
 
-int save(action historique, hand main){
+int save(hlist* historique, hand jeu, int size){
 	FILE *f = fopen("saveHonshu.txt", "w");
-	char * main, histo;
+	int i;
 	if (f == NULL)
 	{
 	    printf("Error opening file!\n");
-	    exit(1);
+	    return 1;
 	}
 	//print size
-	fprintf(f, "%d\n", historique.sz);
+	fprintf(f, "%d\n", size);
 	//print hand
-	for(i = 0; i < main.sz; i ++){
-		fprintf(f, "%d%s\n", i, tuile_toString(main.deck[i]));
+	for(i = 0; i < jeu.sz; i ++){
+		fprintf(f, "%d%s\n", i, tuile_toString(jeu.deck[i]));
 	}
 	// print histo
 	i = 0;
 	while(historique != NULL){
-		fprintf(f, "%d %d%s:%d:%d\n", i, historique.Play.orientation, tuile_toString(historique.tuile),
-			historique.Play.coord[0], historique.Play.coord[1]);
-		historique = historique.next;
+		fprintf(f, "%d %d%s:%d:%d\n", i, historique->Play.orientation, tuile_toString(historique->Play.t),
+			historique->Play.coord[0], historique->Play.coord[1]);
+		historique = historique->next;
 		i ++;
 	}
 	return 0;
@@ -62,12 +96,17 @@ loads the game saved in saveHonshu.txt.
 
 */
 
-historique load(hand * main){
+hlist load(hand * jeu, int * size){
 	int i, test, dropped, coord[2];
-	grille grid;
+	hlist histo;
 	FILE *f = fopen("saveHonshu.txt", "r");
+	if (f == NULL)
+	{
+	    printf("Error opening file!\n");
+	    exit(1);
+	}
 	//reading size
-	fscanf(f, "%d", &grid.size);
+	fscanf(f, "%d", size);
 	//alloc_grille(grid) <-- alloc la taille de la grille.
 	// reading hand
 	for(i = 0; i < 12; i ++){
@@ -76,26 +115,34 @@ historique load(hand * main){
 			break;
 		}
 		//read en expression réguliere en fonction de tuile.toString : v1;v2;v3;v4;v5;v6:c1:c2
-		fscanf(f, "%c;%c;%c;%c;%c;%c", main.tuile[i]->val[0], main.tuile[i]->val[1], 
-				main.tuile[2], main.tuile->val[3], main.tuile[i]->val[4], 
-				main.tuile[i]->val[5], main.tuile[i]->val[6]);
+		fscanf(f, "%c;%c;%c;%c;%c;%c", &(jeu->deck[i].terrains[0]), &(jeu->deck[i].terrains[1]), 
+				&(jeu->deck[i].terrains[2]), &(jeu->deck->terrains[3]), &(jeu->deck[i].terrains[4]), 
+				&(jeu->deck[i].terrains[5]));
 	}
-	main -> sz = i + 1;
+	jeu -> sz = i + 1;
 	//reading historique
 	dropped = 13 - i; // il y a la tuile de départ + 12 - i tuiles posées.
 	action a;
 	tuile pose = tuile();
 	for(i = 0; i < dropped; i ++){
-		fscanf(f, "%d ", test);
+		fscanf(f, "%d ", &test);
 		if(test != i){ //c-a-d qu'on arrive a la fin de l'historique soit la fin du fichier save
 			break;
 		}
-		fscanf(f, "%d:%c;%c;%c;%c;%c;%c:%d:%d", a.orientation,
-			pose.terrains[0], &pose.terrains[1], &pose.terrains[3],
-			&pose.terrains[4], &pose.terrains[5], &pose.terrains[6], coord[0], coord[1]);
+		fscanf(f, "%d:%c;%c;%c;%c;%c;%c:%d:%d", &a.orientation,
+			&pose.terrains[0], &pose.terrains[1], &pose.terrains[3],
+			&pose.terrains[4], &pose.terrains[5], &pose.terrains[6], &coord[0], &coord[1]);
 		a.t = pose;
-		a.coord = coord;
-		pose_tuile(grid, a);
+		a.coord[0] = coord[0];
+		a.coord[1] = coord[1];
+		pose_tuile(histo, a);
 	}
+	return histo;
+}
+
+
+int main(){
+	init_game();
+	save();
 
 }
