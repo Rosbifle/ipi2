@@ -101,7 +101,7 @@ int pose_tuile(grille* g, tuile t, int x, int y){
     return 1; 
 }
 
-tuile pop(hlist* ph){
+tuile pop(historique* ph){
     action act=(*ph)->A;
     *ph=&(*ph->next);
     return act.t;
