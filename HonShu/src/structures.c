@@ -17,6 +17,16 @@ grille init_grid(int sz){
     return g;
 }
 
+/*creer une action*/
+action init_action(tuile tuile, int coord[2], int orientation){
+    action act;
+    act.t = tuile;
+    act.coord[0] = coord[0];
+    act.coord[1] = coord[1];
+    act.orientation = orientation;
+    return act;
+}
+
 /* libère la grille pointée par g*/
 void lib_grille(grille* g){
     free(g);
