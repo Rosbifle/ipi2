@@ -10,7 +10,6 @@ enum pos {rot_0, rot_90, rot_180, rot_270};
 
 typedef struct{
     int id;
-    int orientation;
     char terrains[6];
 } tuile;
 
