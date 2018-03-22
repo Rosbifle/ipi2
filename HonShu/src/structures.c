@@ -1,7 +1,5 @@
 #include "structures.h"
 
-enum pos {rot_0, rot_90, rot_180, rot_270};
-
 /* prend en argument une taille, renvoie un malloc n*n de char*/
 grille init_grid(int sz){
     grille g;
@@ -41,6 +39,18 @@ tuile tuile_random(){
     return t;
 }
 
+void add(action a, historique** h){
+    historique* newHist=malloc(sizeof(historique));
+    newHist->next=*h;
+    newHist->Play=a;
+    *h=newHist;
+}
+
+void pop(historique** h){
+    action a=(*h)->Play;
+    (*h)=(*h)->next;
+}
+
 /* initialise une main de n cartes*/
 hand init_hand(int n){
     hand h;
@@ -51,18 +61,4 @@ hand init_hand(int n){
         h.deck[i]=tuile_random();
     }
     return h;
-}
-
-int main(){
-    srand(time(NULL));
-    hand h=init_hand(4);
-    int i;
-    int j;
-    for(i=0;i<4;i++){
-        for(j=0;j<6;j++){
-            printf("%c ",h.deck[i].terrains[j]);
-        }
-        printf("\n");
-    }
-    return 0;
 }
