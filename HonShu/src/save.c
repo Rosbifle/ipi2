@@ -1,40 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "structures.h"
 
-enum pos {rot_0, rot_90, rot_180, rot_270};
-
-#define bool int
-#define true 1
-#define false 0
-
-typedef struct{
-    int id;
-    int orientation;
-    char terrains[6];
-} tuile;
-
-typedef struct {
-	tuile t;
-	int coord[2];
-	int orientation;
-} action;
-
-typedef struct {
-    int sz;
-    char** grid;
-} grille;
-
-typedef struct {
-    int sz;
-    tuile* deck;
-} hand;
-
-struct Historique{
-  action Play;
-  struct Historique * next;
-} historique;
-typedef struct Historique hlist;
 /* ecriture du fichier */
 /* 
 taille_grille
