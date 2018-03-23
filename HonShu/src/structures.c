@@ -1,6 +1,11 @@
 #include "structures.h"
 
 /* prend en argument une taille, renvoie un malloc n*n de char*/
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 grille init_grid(int sz){
     grille g;
     g.sz=sz;
@@ -18,6 +23,11 @@ grille init_grid(int sz){
 }
 
 /*creer une action*/
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 action init_action(tuile tuile, int coord[2], int orientation){
     action act;
     act.t = tuile;
@@ -28,16 +38,31 @@ action init_action(tuile tuile, int coord[2], int orientation){
 }
 
 /* libère la grille pointée par g*/
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 void lib_grille(grille* g){
     free(g);
 }
 
 /* génère un nombre random entre 0 et n-1*/
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 int randint(int n){
     return rand()%n;
 }
 
 /* génère une tuile random*/
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 tuile tuile_random(){
     /*des trucs ici*/
     int l[6]={102, 108, 112, 114, 117, 118};
@@ -49,6 +74,11 @@ tuile tuile_random(){
     return t;
 }
 
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 void add(action a, historique** h){
     historique* newHist=malloc(sizeof(historique));
     newHist->next=*h;
@@ -56,12 +86,22 @@ void add(action a, historique** h){
     *h=newHist;
 }
 
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 void pop(historique** h){
     action a=(*h)->Play;
     (*h)=(*h)->next;
 }
 
 /* initialise une main de n cartes*/
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 hand init_hand(int n){
     hand h;
     h.sz=n;

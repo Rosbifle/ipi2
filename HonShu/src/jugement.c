@@ -1,5 +1,10 @@
 #include"structures.h"
 
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 bool test_zone_limite(action ac, grille g){
 	if(ac.orientation == rot_0 || ac.orientation == rot_180){
 		if(ac.coord[0] + 1 <= g.sz - 1 && ac.coord[1] + 2 <= g.sz - 1) return true;
@@ -13,6 +18,11 @@ bool test_zone_limite(action ac, grille g){
 
 }
 
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 int village_ville(grille g){
 	int taille = 0;
 	int i, j;

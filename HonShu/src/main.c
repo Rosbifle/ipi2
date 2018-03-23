@@ -4,6 +4,11 @@
 #include "save.h"
 #include "manipulation.h"
 
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 int main(){
     srand(time(NULL));
     hand h=init_hand(4);

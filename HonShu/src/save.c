@@ -19,6 +19,12 @@ taille_grille
 render a tuile to string as val1;val2;val3;...
 @returns: the string of tuile  t
 */
+
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 char * tuile_toString(tuile t){
 	char * str = malloc(11*sizeof(char));
 	sprintf(str, "%c;%c;%c;%c;%c;%c", t.terrains[0], t.terrains[1], 
@@ -31,6 +37,11 @@ Saves the game in saveHonshu.txt
 @returns: 0 if ok 1 if error
 */
 
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 int save(hlist* historique, hand jeu, int size){
 	FILE *f = fopen("saveHonshu.txt", "w");
 	int i;
@@ -64,6 +75,11 @@ loads the game saved in saveHonshu.txt.
 
 */
 
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 hlist load(hand * jeu, int * size){
 	int i, test, dropped, coord[2];
 	hlist histo;
@@ -108,7 +124,11 @@ hlist load(hand * jeu, int * size){
 	return histo;
 }
 
-
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 int main(){
 	init_game();
 	save();

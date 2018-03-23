@@ -2,10 +2,20 @@
 #include"structure.h"
 
 /*retourne type de terrain d'une case*/
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 int read_terrain(int x, int y){
     return g.grid[x][y];
 }
 
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 void action_add(tuile t, int x, int y, historique* historique, enum pos rot_a){
     action pose;
     pose.tuile=t;
@@ -17,6 +27,11 @@ void action_add(tuile t, int x, int y, historique* historique, enum pos rot_a){
     return;
 }
 
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 int pose_tuile_histo(grille* g, tuile t, int x, int y, historique* historique,enum pose rot_a){
     if (posable(*g , t, x, y,rot_a)==0){
         action_add(t, x, y, historique, rot_a);
@@ -57,7 +72,11 @@ int pose_tuile_histo(grille* g, tuile t, int x, int y, historique* historique,en
     return 1; 
 }
 
-
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 int pose_tuile_histo(grille* g, tuile t, int x, int y, historique* historique,enum pose rot_a){
     if (posable(*g , t, x, y,rot_a)==0){
         if (rot_a->==rot_0){
@@ -97,13 +116,22 @@ int pose_tuile_histo(grille* g, tuile t, int x, int y, historique* historique,en
     return 1; 
 }
 
-
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 tuile pop(hlist ph){
     action act=(*ph)->A;
     *ph=&(*ph->next);
     return act.t;
 }
 
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
 int ret_last_tuil(grille* g, hlist historique ,int sz){
     if (historique->next==NULL){
         return 1;
