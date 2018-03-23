@@ -72,7 +72,7 @@ int village_ville(grille g){
 */
 bool posable(grille g, tuile t, int x, int y, enum pos rot_a ){
 	int coord[2] = {x,y};
-	action act = init_action(t,coord[2],rot_a);
+	action act = init_action(t,coord,rot_a);
 	if(test_zone_limite(act,g)) return true;
 	else return false;
 }
