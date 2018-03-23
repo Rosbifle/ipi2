@@ -1,5 +1,4 @@
 #include"structures.h"
-#include"jugement.h"
 
 /**
  *\brief 
@@ -66,5 +65,16 @@ int village_ville(grille g){
 
 }
 
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
+bool posable(grille g, tuille t, x, y, rot_a ){
+	int coord[2] = {x,y};
+	action act = init_action(t,coord[2],rot_a);
+	if(test_zone_limite(act,g)) return true;
+	else return false;
+}
 
 
