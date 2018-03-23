@@ -64,7 +64,7 @@ int randint(int n){
  *\return 
 */
 tuile tuile_random(){
-    /*des trucs ici*/
+    /*102='f', 108='l', 112='p', 114='r', 117='u', 118='v'*/
     int l[6]={102, 108, 112, 114, 117, 118};
     tuile t;
     int i;
