@@ -1,4 +1,4 @@
-#include"structures.h"
+#include"../inc/structures.h"
 
 /**
  *\brief 
