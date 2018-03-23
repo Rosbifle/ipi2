@@ -8,7 +8,6 @@
  * - action load(hand * main) : Charge une partie
  */
 
-#include "structures.h"
 #include <string.h>
 
 char * tuile_toString(tuile t);
