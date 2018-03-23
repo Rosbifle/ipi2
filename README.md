@@ -6,14 +6,14 @@ J'ai créé une branch 'developing' sur laquelle on taffe. on travaille sur deve
 Doxgen:
 Une module pour le commentaire
 
-pour une fonction:
+11111111pour une fonction:
 /**
  *\brief lis la COORDONNEE (x,y) DE LA GRILLE
   \param x>=0 , y>=0 , tableau char * g NOT NULL
  *\return le char en coordonnées (x,y) de la grille g
 */
 
-pour un .h:
+22222222pour un .h:
 /**
  * \file structuile.h
  * 
@@ -29,3 +29,5 @@ pour un .h:
  * - initi_tuiles(nb_tuile) : génère nb_tuile aléatoirement
  * - initi_tuiles_fichier( FILE* fp) : génère les tuiles à partir d'un fichier
  */
+
+3333333 il faut copier ce que vous avez ecrire devant la fonction sur celle dans le fichier .h
