@@ -271,7 +271,7 @@ int ret_last_tuil(grille g, hlist hist ,int sz, enum pos rot_a){
 void show_tuile(tuile t){
     int k;
     for(k=0;k<6;k++){
-        if(k==4){
+        if(k==3){
             printf("\n");
         }
         printf("%d",t.terrains[k]);
