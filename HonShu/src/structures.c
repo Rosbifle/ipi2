@@ -257,7 +257,6 @@ int ret_last_tuil(grille g, hlist hist ,int sz, enum pos rot_a){
     if (hist->next==NULL){
         return 1;
     }
-    int i;
     lib_grille(&g);
     pop(&hist);
     g=init_grid(sz);
