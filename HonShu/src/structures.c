@@ -153,9 +153,10 @@ action* action_create(tuile t, int x, int y, enum pos rot_a){
   \param 
  *\return 
 */
-int pose_tuile_histo(grille g, tuile t, int x, int y, historique* historique,enum pos rot_a){
+int pose_tuile_histo(grille g, tuile t, int x, int y, hlist* historique,enum pos rot_a){
     if (posable(g , t, x, y,rot_a)==1){
-        action_add(t, x, y, historique, rot_a);
+        a = action(t, {x, y}, rot_a);
+        add(a, historique);
         if (rot_a==rot_0){
             g.grid[x][y]=t.terrains[0];  
             g.grid[x][y+1]=t.terrains[1];
@@ -192,6 +193,15 @@ int pose_tuile_histo(grille g, tuile t, int x, int y, historique* historique,enu
     }
     return 1; 
 }
+/**
+ *\brief 
+  \param 
+ *\return 
+*/
+int pose_tuile_histo_action(grille g, hlist* histo, action act){
+  return pose_tuile_histo(g, act.t, act.coord[0], act.coord[1], histo, act.orientation);
+}
+
 
 /**
  *\brief 
