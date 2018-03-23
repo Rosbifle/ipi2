@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "structures.h"
 
+#include "../inc/structures.h"
 /* ecriture du fichier */
 /* 
 taille_grille
@@ -19,12 +19,6 @@ taille_grille
 render a tuile to string as val1;val2;val3;...
 @returns: the string of tuile  t
 */
-
-/**
- *\brief 
-  \param 
- *\return 
-*/
 char * tuile_toString(tuile t){
 	char * str = malloc(11*sizeof(char));
 	sprintf(str, "%c;%c;%c;%c;%c;%c", t.terrains[0], t.terrains[1], 
@@ -37,12 +31,7 @@ Saves the game in saveHonshu.txt
 @returns: 0 if ok 1 if error
 */
 
-/**
- *\brief 
-  \param 
- *\return 
-*/
-int save(hlist* historique, hand jeu, int size){
+int save(hlist historique, hand jeu, int size){
 	FILE *f = fopen("saveHonshu.txt", "w");
 	int i;
 	if (f == NULL)
@@ -50,16 +39,16 @@ int save(hlist* historique, hand jeu, int size){
 	    printf("Error opening file!\n");
 	    return 1;
 	}
-	//print size
+	/* print size */
 	fprintf(f, "%d\n", size);
-	//print hand
+	/* print hand */
 	for(i = 0; i < jeu.sz; i ++){
 		fprintf(f, "%d%s\n", i, tuile_toString(jeu.deck[i]));
 	}
-	// print histo
+	/* print histo */
 	i = 0;
 	while(historique != NULL){
-		fprintf(f, "%d %d%s:%d:%d\n", i, historique->Play.orientation, tuile_toString(historique->Play.t),
+		fprintf(f, "%d %d%s:%d:%d\n", i, &historique->Play.orientation, tuile_toString(historique->Play.t),
 			historique->Play.coord[0], historique->Play.coord[1]);
 		historique = historique->next;
 		i ++;
@@ -75,11 +64,6 @@ loads the game saved in saveHonshu.txt.
 
 */
 
-/**
- *\brief 
-  \param 
- *\return 
-*/
 hlist load(hand * jeu, int * size){
 	int i, test, dropped, coord[2];
 	hlist histo;
@@ -89,28 +73,28 @@ hlist load(hand * jeu, int * size){
 	    printf("Error opening file!\n");
 	    exit(1);
 	}
-	//reading size
+	/* reading size*/
 	fscanf(f, "%d", size);
-	//alloc_grille(grid) <-- alloc la taille de la grille.
-	// reading hand
+	/*alloc_grille(grid) <-- alloc la taille de la grille.
+	 reading hand */
 	for(i = 0; i < 12; i ++){
 		fscanf(f, "%d", &test);
 		if(test != i){ //c-a-d qu'on arrive a l'historique du
 			break;
 		}
-		//read en expression réguliere en fonction de tuile.toString : v1;v2;v3;v4;v5;v6:c1:c2
+		/* read en expression réguliere en fonction de tuile.toString : v1;v2;v3;v4;v5;v6:c1:c2 */
 		fscanf(f, "%c;%c;%c;%c;%c;%c", &(jeu->deck[i].terrains[0]), &(jeu->deck[i].terrains[1]), 
 				&(jeu->deck[i].terrains[2]), &(jeu->deck->terrains[3]), &(jeu->deck[i].terrains[4]), 
 				&(jeu->deck[i].terrains[5]));
 	}
 	jeu -> sz = i + 1;
-	//reading historique
+	/* reading historique */
 	dropped = 13 - i; // il y a la tuile de départ + 12 - i tuiles posées.
 	action a;
-	tuile pose = tuile();
+	tuile pose = tuile_random();
 	for(i = 0; i < dropped; i ++){
 		fscanf(f, "%d ", &test);
-		if(test != i){ //c-a-d qu'on arrive a la fin de l'historique soit la fin du fichier save
+		if(test != i){ /* c-a-d qu'on arrive a la fin de l'historique soit la fin du fichier save */
 			break;
 		}
 		fscanf(f, "%d:%c;%c;%c;%c;%c;%c:%d:%d", &a.orientation,
@@ -124,13 +108,3 @@ hlist load(hand * jeu, int * size){
 	return histo;
 }
 
-/**
- *\brief 
-  \param 
- *\return 
-*/
-int main(){
-	init_game();
-	save();
-
-}
