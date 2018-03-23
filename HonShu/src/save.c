@@ -48,7 +48,7 @@ int save(hlist historique, hand jeu, int size){
 	/* print histo */
 	i = 0;
 	while(historique != NULL){
-		fprintf(f, "%d %d%s:%d:%d\n", i, &historique->Play.orientation, tuile_toString(historique->Play.t),
+		fprintf(f, "%d %d%s:%d:%d\n", i, historique->Play.orientation, tuile_toString(historique->Play.t),
 			historique->Play.coord[0], historique->Play.coord[1]);
 		historique = historique->next;
 		i ++;
@@ -64,7 +64,7 @@ loads the game saved in saveHonshu.txt.
 
 */
 
-hlist load(hand * jeu, int * size){
+hlist load(grille g, hand * jeu, int * size){
 	int i, test, dropped, coord[2];
 	hlist histo;
 	FILE *f = fopen("saveHonshu.txt", "r");
@@ -79,7 +79,7 @@ hlist load(hand * jeu, int * size){
 	 reading hand */
 	for(i = 0; i < 12; i ++){
 		fscanf(f, "%d", &test);
-		if(test != i){ //c-a-d qu'on arrive a l'historique du
+		if(test != i){ /* c-a-d qu'on arrive a l'historique du */
 			break;
 		}
 		/* read en expression réguliere en fonction de tuile.toString : v1;v2;v3;v4;v5;v6:c1:c2 */
@@ -89,7 +89,7 @@ hlist load(hand * jeu, int * size){
 	}
 	jeu -> sz = i + 1;
 	/* reading historique */
-	dropped = 13 - i; // il y a la tuile de départ + 12 - i tuiles posées.
+	dropped = 13 - i; /* il y a la tuile de départ + 12 - i tuiles posées. */	
 	action a;
 	tuile pose = tuile_random();
 	for(i = 0; i < dropped; i ++){
@@ -103,7 +103,7 @@ hlist load(hand * jeu, int * size){
 		a.t = pose;
 		a.coord[0] = coord[0];
 		a.coord[1] = coord[1];
-		pose_tuile(histo, a);
+		pose_tuile_histo(g, &histo, a);
 	}
 	return histo;
 }
