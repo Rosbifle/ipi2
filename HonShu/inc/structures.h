@@ -55,20 +55,95 @@ struct Historique{
 } ;
 typedef struct Historique historique;
 typedef historique* hlist;
-
+/*
+ *\brief initialise une grille
+ *\param la taille de la grille
+ *\return une grille
+*/
 grille init_grid(int sz);
+/*
+ *\brief initialise un historique
+ *\param /
+ *\return une adresse vide (dernier élément d'un historique)
+*/
 historique* init_historique();
+/*
+ *\brief initialise une action 
+ *\param une tuile, sa coordonnée et son orientation de placement
+ *\return une action
+*/
 action init_action(tuile tuile, int coord[2], int orientation);
+/*
+ *\brief génère une tuile aléatoirement 
+ *\param /
+ *\return une tuile
+*/
 tuile tuile_random(); 
+/*
+ *\brief libère une grille (malloc)
+ *\param le pointeur vers cette grille
+ *\return /
+*/
 void lib_grille(grille * g);
+/*
+ *\brief ajoute une action a à l'historique
+ *\param une action, l'adresse de l'adresse vers l'historique
+ *\return /
+*/
 void add(action a, historique** h);
+/*
+ *\brief  pop la dernière action de l'historique
+ *\param l'adresse de l'adresse vers l'historique
+ *\return l'action qui a été pop
+*/
 action pop(historique** h);
+/*
+ *\brief initialise une main 
+ *\param la taille de la main
+ *\return une main
+*/
 hand init_hand(int n);
+/*
+ *\brief lit la case du terrain de coordonnée donnée 
+ *\param une grille, deux coordonnées x et y
+ *\return un entier ASCII
+*/
 int read_terrain(grille g, int x, int y);
+/*
+ *\brief crée une action
+ *\param une grille g, les coordonnées de placement x et y
+ *\return une adresse vers l'action créée
+*/
 action* action_create(tuile t, int x, int y, enum pos rot_a);
-int pose_tuile_histo(grille g, tuile t, int x, int y, historique* historique,enum pos rot_a);
+/*
+ *\brief affiche le contenu d'une tuile 
+ *\param une tuile t
+ *\return /
+*/
+void show_tuile(tuile t);
+/*
+ *\brief pose une tuile et enregistre l'action dans l'historique
+ *\param une grille g, une tuile t, des coordonnées x et y, un adresse d'adresse vers un historique, une position
+ *\return 0 si ça réussit, 1 si ça rate
+*/
+int pose_tuile_histo(grille g, tuile t, int x, int y, hlist* historique,enum pos rot_a);
+/*
+ *\brief pose une tuile simplement
+ *\param une grille g, une tuile t, des coordonnées x et y, une position
+ *\return 0 si ça réussit, 1 si ça rate
+*/
 int pose_tuile(grille g, tuile t, int x, int y,enum pos rot_a);
-int pose_tuile_histo_action(grille g, hlist historique, action act);
+/*
+ *\brief alias pour pose_tuile_histo avec une action au lieu des différents 
+ *\param prend une grille g, une adresse d'une adresse vers un historique et une action
+ *\return 0 si ça réussit, 1 si ça rate
+*/
+int pose_tuile_histo_action(grille g, hlist* histo, action act);
+/*
+ *\brief retire la dernière tuile
+ *\param une grille, une adresse vers une adresse d'une liste, la taille et la position de la dernière tuile
+ *\return 0 si ça réussit, 1 si ça rate
+*/
 
 int ret_last_tuil(grille g, hlist hist ,int sz, enum pos rot_a);
 
