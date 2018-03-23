@@ -70,7 +70,7 @@ int village_ville(grille g){
   \param 
  *\return 
 */
-bool posable(grille g, tuille t, x, y, rot_a ){
+bool posable(grille g, tuile t, int x, int y, enum pos rot_a ){
 	int coord[2] = {x,y};
 	action act = init_action(t,coord[2],rot_a);
 	if(test_zone_limite(act,g)) return true;
