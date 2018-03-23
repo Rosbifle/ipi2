@@ -56,15 +56,19 @@ struct Historique{
 typedef struct Historique historique;
 typedef historique* hlist;
 
-void lib_grille(grille * g);
-tuile tuile_random(); 
-hand init_hand(int n);
 grille init_grid(int sz);
-bool test_zone_limite(action ac, grille g);
-int village_ville(grille g);
+historique* init_historique();
+action init_action(tuile tuile, int coord[2], int orientation);
+tuile tuile_random(); 
+void lib_grille(grille * g);
+void add(action a, historique** h);
+action pop(historique** h);
+hand init_hand(int n);
+int read_terrain(grille g, int x, int y);
+action* action_create(tuile t, int x, int y, enum pos rot_a);
 int pose_tuile_histo(grille g, tuile t, int x, int y, historique* historique,enum pos rot_a);
 int pose_tuile(grille g, tuile t, int x, int y,enum pos rot_a);
-action pop(hlist* ph);
+int ret_last_tuil(grille g, hlist hist ,int sz, enum pos rot_a);
 
 
 /**
@@ -81,6 +85,3 @@ action pop(hlist* ph);
 
 
 
-int read_terrain(grille g, int x, int y);
-void action_add(tuile t, int x, int y, historique* historique,enum pos rot_a);
-int ret_last_tuil(grille g, historique* historique ,int sz,enum pos rot_a);
