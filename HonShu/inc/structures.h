@@ -3,19 +3,19 @@
  * 
  * 5 type et 7 fonctions
  * 
- * - type \a tuile : ECRIRE 
- * \a action : ECRIRE 
- * \a grille : ECRIRE
- * \a hand : ECRIRE
- * \a Historique : ECRIRE
+ * - type \a tuile : Contient 6 caractères parmi : L R U F V P
+ * \a action : Contient une tuile , ses coordonnées et son orientation de placement 
+ * \a grille : Contient la taille et un tableau n*n
+ * \a hand : Contient le nombre de tuiles et une liste de tuiles
+ * \a Historique : Une pile d’action 
  * 
- * - void lib_grille(grille* g) : ECRIRE 
- * - tuile tuile_random() : ECRIRE
- * - hand init_hand(int n) : ECRIRE
- * - void pose_tuile(grille* g, tuile t, int x, int y) : ECRIRE
- * - grille init_grid(int sz) : ECRIRE 
- * - bool test_zone_limite(action ac, grille g) : ECRIRE
- * - int village_ville(grille g) : ECRIRE
+ * - void lib_grille(grille* g) : Libère la grille
+ * - tuile tuile_random() : Génère une tuile aléatoire 
+ * - hand init_hand(int n) : Initialise la liste
+ * - void pose_tuile(grille* g, tuile t, int x, int y) : Pose la tuile
+ * - grille init_grid(int sz) : Initialise la grille
+ * - bool test_zone_limite(action ac, grille g) : Teste si on peut poser la tuile
+ * - int village_ville(grille g) : Detecte le plus grand village de la grille
  */
 
 #include <stdio.h>
@@ -71,8 +71,6 @@ int pose_tuile(grille g, tuile t, int x, int y,enum pos rot_a);
 int pose_tuile_histo_action(grille g, hlist historique, action act);
 
 int ret_last_tuil(grille g, hlist hist ,int sz, enum pos rot_a);
-
-void show_tuile(tuile t);
 
 
 /**
