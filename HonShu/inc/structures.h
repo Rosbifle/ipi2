@@ -1,3 +1,23 @@
+/**
+ * \file structures.h
+ * 
+ * 5 type et 7 fonctions
+ * 
+ * - type \a tuile : ECRIRE 
+ * \a action : ECRIRE 
+ * \a grille : ECRIRE
+ * \a hand : ECRIRE
+ * \a Historique : ECRIRE
+ * 
+ * - void lib_grille(grille* g) : ECRIRE 
+ * - tuile tuile_random() : ECRIRE
+ * - hand init_hand(int n) : ECRIRE
+ * - void pose_tuile(grille* g, tuile t, int x, int y) : ECRIRE
+ * - grille init_grid(int sz) : ECRIRE 
+ * - bool test_zone_limite(action ac, grille g) : ECRIRE
+ * - int village_ville(grille g) : ECRIRE
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
