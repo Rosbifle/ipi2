@@ -5,3 +5,4 @@
 #include "../inc/manipulation.h"
 #include "../inc/structures.h"
 #include "../inc/save.h"
+#include "../inc/jugement.h"
