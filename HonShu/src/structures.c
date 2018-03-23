@@ -44,7 +44,11 @@ action init_action(tuile tuile, int coord[2], int orientation){
  *\return 
 */
 void lib_grille(grille* g){
-    free(g);
+    int i;
+    for(i=0;i<g->sz;i++){
+        free(g->grid[i]);
+    }
+    free(g->grid);
 }
 
 /* génère un nombre random entre 0 et n-1*/
@@ -146,7 +150,7 @@ action* action_create(tuile t, int x, int y, enum pos rot_a){
  *\return 
 */
 int pose_tuile_histo(grille g, tuile t, int x, int y, historique* historique,enum pos rot_a){
-    if (posable(g , t, x, y,rot_a)==0){
+    if (posable(g , t, x, y,rot_a)==1){
         action_add(t, x, y, historique, rot_a);
         if (rot_a==rot_0){
             g.grid[x][y]=t.terrains[0];  
@@ -191,7 +195,7 @@ int pose_tuile_histo(grille g, tuile t, int x, int y, historique* historique,enu
  *\return 
 */
 int pose_tuile(grille g, tuile t, int x, int y,enum pos rot_a){
-    if (posable(g , t, x, y,rot_a)==0){
+    if (posable(g , t, x, y,rot_a)==1){
         if (rot_a==rot_0){
             g.grid[x][y]=t.terrains[0];  
             g.grid[x][y+1]=t.terrains[1];
@@ -240,10 +244,7 @@ int ret_last_tuil(grille g, hlist hist ,int sz, enum pos rot_a){
         return 1;
     }
     int i;
-    for(i=0;i<sz;i++){
-        free(g.grid[i]);
-    }
-    free(g.grid);
+    lib_grille(&g);
     pop(&hist);
     g=init_grid(sz);
     while (hist->next != NULL){
