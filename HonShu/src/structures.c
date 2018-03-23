@@ -22,6 +22,10 @@ grille init_grid(int sz){
     return g;
 }
 
+historique* init_historique(){
+    return NULL;
+}
+
 /*creer une action*/
 /**
  *\brief 
