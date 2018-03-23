@@ -62,7 +62,7 @@ int village_ville(grille g){
 			}
 		}
 	}
-
+	return taille;
 }
 
 /**
