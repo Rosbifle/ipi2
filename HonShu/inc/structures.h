@@ -68,6 +68,8 @@ int read_terrain(grille g, int x, int y);
 action* action_create(tuile t, int x, int y, enum pos rot_a);
 int pose_tuile_histo(grille g, tuile t, int x, int y, historique* historique,enum pos rot_a);
 int pose_tuile(grille g, tuile t, int x, int y,enum pos rot_a);
+int pose_tuile_histo_action(grille g, hlist historique, action act);
+
 int ret_last_tuil(grille g, hlist hist ,int sz, enum pos rot_a);
 
 
