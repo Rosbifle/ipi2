@@ -72,6 +72,8 @@ int pose_tuile_histo_action(grille g, hlist historique, action act);
 
 int ret_last_tuil(grille g, hlist hist ,int sz, enum pos rot_a);
 
+void show_tuile(tuile t);
+
 
 /**
  * \file manipulation.h
