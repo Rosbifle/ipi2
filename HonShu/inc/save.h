@@ -3,9 +3,9 @@
  * 
  * 3 fonctions
  * 
- * - char * tuile_toString(tuile t) : ECRIRE
- * - int save(action historique, hand main) : ECRIRE
- * - action load(hand * main) : ECRIRE
+ * - char * tuile_toString(tuile t) : Affiche une tuile
+ * - int save(action historique, hand main) : Sauvegarde une tuile dans le fichier save_honshu.txt
+ * - action load(hand * main) : Charge une partie
  */
 
 #include "structures.h"
