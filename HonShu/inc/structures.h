@@ -30,7 +30,6 @@ enum pos {rot_0, rot_90, rot_180, rot_270};
 
 typedef struct{
     int id;
-    int orientation;
     char terrains[6];
 } tuile;
 
@@ -57,13 +56,15 @@ struct Historique{
 typedef struct Historique historique;
 typedef historique* hlist;
 
-void lib_grille(grille* g);
-tuile tuile_random();
+void lib_grille(grille * g);
+tuile tuile_random(); 
 hand init_hand(int n);
-void pose_tuile(grille* g, tuile t, int x, int y);
 grille init_grid(int sz);
 bool test_zone_limite(action ac, grille g);
 int village_ville(grille g);
+int pose_tuile_histo(grille g, tuile t, int x, int y, historique* historique,enum pos rot_a);
+int pose_tuile(grille g, tuile t, int x, int y,enum pos rot_a);
+action pop(hlist* ph);
 
 
 /**
@@ -78,8 +79,8 @@ int village_ville(grille g);
  * - int ret_last_tuil(grille* g, historique* historique ,int sz) : ECRIRE
  */
 
-#include"structures.h"
+
 
 int read_terrain(grille g, int x, int y);
 void action_add(tuile t, int x, int y, historique* historique,enum pos rot_a);
-int ret_last_tuil(grille* g, historique* historique ,int sz);
+int ret_last_tuil(grille g, historique* historique ,int sz,enum pos rot_a);
