@@ -144,7 +144,6 @@ int pose_tuile_histo_action(grille g, hlist* histo, action act);
  *\param une grille, une adresse vers une adresse d'une liste, la taille et la position de la dernière tuile
  *\return 0 si ça réussit, 1 si ça rate
 */
-
 int ret_last_tuil(grille g, hlist hist ,int sz, enum pos rot_a);
 
 
