@@ -2,8 +2,8 @@
 #include <string.h>
 #include "CUnit/CUnit.h"
 #include "CUnit/Basic.h"
-#include "../inc/save.h"
 #include "../inc/structures.h"
+#include "../inc/save.h"
 
 
 
@@ -186,12 +186,12 @@ void test_pose_tuile_histo(void){
 
 int main(){
     CU_pSuite pSuite =NULL;
-    //Intialise le registre de test 
+    /*Intialise le registre de test */
     if (CU_initialize_registry() != CUE_SUCCESS){
         return CU_get_error();
     }
 
-    //Ajoute de la suite au registre
+    /*Ajoute de la suite au registre*/
     pSuite = CU_add_suite("Suite", init_suite, clean_suite);
     if(pSuite == NULL)
     {
@@ -199,20 +199,18 @@ int main(){
         return CU_get_error();
     }
 
-    //Ajoute du test à la suite
+    /*Ajoute du test à la suite*/
     if ((CU_add_test(pSuite, "Test de creation d'une grille", test_init_grid) == NULL) ||
         (CU_add_test(pSuite, "Test de creation d'une tuile", test_tuile_random) == NULL) ||
         (CU_add_test(pSuite, "Test de creation d'une action", test_init_action) == NULL) ||
         (CU_add_test(pSuite, "Test de liberation de memoire", test_lib_grille) == NULL) ||
         (CU_add_test(pSuite, "Test de Creation de hand", test_init_hand) == NULL) ||
         (CU_add_test(pSuite, "Test de poser une tuille", test_pose_tuile) == NULL) ||
-        (CU_add_test(pSuite, "Test d'ajouter cette action a l'historique", test_pose_tuile_histo) == NULL) 
-        
-        ){
+        (CU_add_test(pSuite, "Test d'ajouter cette action a l'historique", test_pose_tuile_histo) == NULL)){
         CU_cleanup_registry();
         return CU_get_error();
     }
-    //Exécute tous les tests
+    /*Exécute tous les tests*/
     CU_basic_set_mode (CU_BRM_VERBOSE);
     CU_basic_run_tests();
     CU_cleanup_registry();
