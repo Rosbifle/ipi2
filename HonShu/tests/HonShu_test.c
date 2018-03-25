@@ -206,7 +206,7 @@ int main(){
         (CU_add_test(pSuite, "Test de liberation de memoire", test_lib_grille) == NULL) ||
         (CU_add_test(pSuite, "Test de Creation de hand", test_init_hand) == NULL) ||
         (CU_add_test(pSuite, "Test de poser une tuille", test_pose_tuile) == NULL) ||
-        (CU_add_test(pSuite, "Test d'ajouter cette action a l'historique", test_pose_tuile_histo) == NULL) ||
+        (CU_add_test(pSuite, "Test d'ajouter cette action a l'historique", test_pose_tuile_histo) == NULL) 
         
         ){
         CU_cleanup_registry();
