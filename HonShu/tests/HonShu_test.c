@@ -2,7 +2,7 @@
 #include <string.h>
 #include "CUnit/CUnit.h"
 #include "CUnit/Basic.h"
-#include "../inc/save.h"
+#include "../inc/structures.h"
 
 
 /* Pointer to the file used by the tests. */
