@@ -8,6 +8,8 @@ BINDIR = bin
 TESTDIR = tests
 INCDIR = inc
 
+$(BINDIR)/test.o: $(TESTDIR)/HonShu_test.c  $(SRCDIR)/save.c $(SRCDIR)/jugement.c $(SRCDIR)/structures.c
+	$(CC) -c $(TESTDIR)/HonShu_test.c $(SRCDIR)/save.c $(SRCDIR)/jugement.c $(SRCDIR)/structures.c
 $(BINDIR)/main.o: $(SRCDIR)/main.c $(SRCDIR)/save.c $(SRCDIR)/jugement.c $(SRCDIR)/structures.c
 	$(CC) -c $(SRCDIR)/main.c $(SRCDIR)/save.c $(SRCDIR)/jugement.c $(SRCDIR)/structures.c
 
