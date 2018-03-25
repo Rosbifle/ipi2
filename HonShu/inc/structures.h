@@ -17,7 +17,8 @@
  * - bool test_zone_limite(action ac, grille g) : Teste si on peut poser la tuile
  * - int village_ville(grille g) : Detecte le plus grand village de la grille
  */
-
+#ifndef STRUCTURES_H
+#define STRUCTURES_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -148,3 +149,4 @@ int ret_last_tuil(grille g, hlist hist ,int sz, enum pos rot_a);
 
 
 
+#endif
