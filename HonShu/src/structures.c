@@ -209,7 +209,7 @@ int pose_tuile_histo_action(grille g, hlist* histo, action act){
  *\return 
 */
 int pose_tuile(grille g, tuile t, int x, int y,enum pos rot_a){
-    if (posable(g , t, x, y,rot_a)==1){
+    if (1==1){
         if (rot_a==rot_0){
             g.grid[x][y]=t.terrains[0];  
             g.grid[x][y+1]=t.terrains[1];
