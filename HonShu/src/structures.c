@@ -155,7 +155,7 @@ action* action_create(tuile t, int x, int y, enum pos rot_a){
 */
 int pose_tuile_histo(grille g, tuile t, int x, int y, hlist* historique,enum pos rot_a){
     if (posable(g , t, x, y,rot_a)==1){
-        a = action(t, {x, y}, rot_a);
+        action a = action_create(t, x, y, rot_a);
         add(a, historique);
         if (rot_a==rot_0){
             g.grid[x][y]=t.terrains[0];  
