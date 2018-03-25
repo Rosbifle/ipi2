@@ -103,7 +103,7 @@ hlist load(grille g, hand * jeu, int * size){
 		a.t = pose;
 		a.coord[0] = coord[0];
 		a.coord[1] = coord[1];
-		pose_tuile_histo(g, &histo, a);
+		pose_tuile_histo_action(g, &histo, a);
 	}
 	return histo;
 }
