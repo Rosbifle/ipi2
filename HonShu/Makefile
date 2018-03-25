@@ -21,9 +21,8 @@ $(BINDIR)/structures.o: $(SRCDIR)/structures.c
 	$(CC) -c structures.c
 
 
-test: $(TESTDIR)/test
+test: $(TESTDIR)/HonShu_test
 
 clean:
 	rm $(OBJDIR)/*.o
-	rm $(BINDIR)/graph_test
 	rm $(TESTDIR)/test
