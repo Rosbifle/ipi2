@@ -3,6 +3,7 @@
 #include "CUnit/CUnit.h"
 #include "CUnit/Basic.h"
 #include "../inc/save.h"
+#include "../inc/structures.h"
 
 
 
