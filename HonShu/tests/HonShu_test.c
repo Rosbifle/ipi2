@@ -2,7 +2,9 @@
 #include <string.h>
 #include "CUnit/CUnit.h"
 #include "CUnit/Basic.h"
-#include "../inc/structures.h"
+#include "../inc/save.h"
+#include "../inc/jugement.h"
+
 
 
 /* Pointer to the file used by the tests. */
@@ -176,88 +178,6 @@ void test_pose_tuile_histo(void){
     lib_grille(&g);
 }
 
-void test_test_zone_limite(void){
-    grille g = init_grid(100);
-    tuile t = tuile_random();
-    
-    int coord[2] = {0,0};
-    int orientation = rot_0;
-    action ac = init_action(t, coord, orientation);
-    CU_ASSERT_EQUAL(test_zone_limite(ac,g),true);
-    
-    coord[0] = 99;
-    coord[1] = 99;
-    ac = init_action(t, coord, orientation);
-    CU_ASSERT_EQUAL(test_zone_limite(ac,g),false);
-    
-    coord[0] = 0;
-    coord[1] = 0;
-    orientation = rot_180;
-    ac = init_action(t, coord, orientation);
-    CU_ASSERT_EQUAL(test_zone_limite(ac,g),true);
-    
-    coord[0] = 99;
-    coord[1] = 99;
-    ac = init_action(t, coord, orientation);
-    CU_ASSERT_EQUAL(test_zone_limite(ac,g),false);
-    
-    coord[0] = 0;
-    coord[1] = 0;
-    orientation = rot_90;
-    ac = init_action(t, coord, orientation);
-    CU_ASSERT_EQUAL(test_zone_limite(ac,g),true);
-    
-    coord[0] = 99;
-    coord[1] = 99;
-    ac = init_action(t, coord, orientation);
-    CU_ASSERT_EQUAL(test_zone_limite(ac,g),false);
-    
-    coord[0] = 0;
-    coord[1] = 0;
-    orientation = rot_270;
-    ac = init_action(t, coord, orientation);
-    CU_ASSERT_EQUAL(test_zone_limite(ac,g),true);
-    
-    coord[0] = 99;
-    coord[1] = 99;
-    ac = init_action(t, coord, orientation);
-    CU_ASSERT_EQUAL(test_zone_limite(ac,g),false);
-    
-    lib_grille(&g);
-}
-
-void test_village_ville(void){
-    grille g = init_grid(100);
-    int l = 118;
-    tuile t;
-    int i;
-    for(i = 0; i < 6; i++){
-        t.terrains[i]=(char)l;
-    }
-    
-    int coord[2] = {0,0};
-    int orientation = rot_0;
-    action ac = init_action(t, coord, orientation);
-    CU_ASSERT_EQUAL(village_ville(g),6);
-    
-    lib_grille(&g);
-}
-
-void test_posable(void){
-    grille g = init_grid(100);
-    tuile t = tuile_random();
-    
-    int coord[2] = {0,0};
-    int orientation = rot_0;
-    action ac = init_action(t, coord, orientation);
-    CU_ASSERT_EQUAL(posable(g, t, coord[0], coord[1], orientation),1);
-    
-    coord[0] = 99;
-    coord[1] = 99;
-    ac = init_action(t, coord, orientation);
-    CU_ASSERT_EQUAL(posable(g, t, coord[0], coord[1], orientation),0);
-    
-}
 
 
 
@@ -286,9 +206,7 @@ int main(){
         (CU_add_test(pSuite, "Test de Creation de hand", test_init_hand) == NULL) ||
         (CU_add_test(pSuite, "Test de poser une tuille", test_pose_tuile) == NULL) ||
         (CU_add_test(pSuite, "Test d'ajouter cette action a l'historique", test_pose_tuile_histo) == NULL) ||
-        (CU_add_test(pSuite, "Test de verification de postion de cette tuile", test_test_zone_limite) == NULL) ||
-        (CU_add_test(pSuite, "Test de retour la plus grande ville", test_village_ville) == NULL) ||
-        (CU_add_test(pSuite, "Test si on peut mettre cette tuile ici", test_posable) == NULL)
+        
         ){
         CU_cleanup_registry();
         return CU_get_error();
