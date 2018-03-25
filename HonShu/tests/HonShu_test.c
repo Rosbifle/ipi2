@@ -2,10 +2,8 @@
 #include <string.h>
 #include "CUnit/CUnit.h"
 #include "CUnit/Basic.h"
-#include "../inc/manipulation.h"
-#include "../inc/structures.h"
 #include "../inc/save.h"
-#include "../inc/jugement.h"
+
 
 /* Pointer to the file used by the tests. */
 static FILE* temp_file = NULL;
@@ -143,7 +141,7 @@ void test_pose_tuile_histo(void){
     }
     int x = 50;
     int y = 50;
-    pose_tuile(g, t, x, y, &newHlist, rot_0);
+    pose_tuile_histo(g, t, x, y, &newHlist, rot_0);
     CU_ASSERT_EQUAL(g.grid[x][y],'f');
     CU_ASSERT_EQUAL(g.grid[x][y+1],'l');
     CU_ASSERT_EQUAL(g.grid[x][y+2],'p');
@@ -151,7 +149,7 @@ void test_pose_tuile_histo(void){
     CU_ASSERT_EQUAL(g.grid[x+1][y+1],'u');
     CU_ASSERT_EQUAL(g.grid[x+1][y+2],'v');
 
-    pose_tuile(g, t, x, y,&newHlist, rot_180);
+    pose_tuile_histo(g, t, x, y,&newHlist, rot_180);
     CU_ASSERT_EQUAL(g.grid[x][y],'v');
     CU_ASSERT_EQUAL(g.grid[x][y+1],'u');
     CU_ASSERT_EQUAL(g.grid[x][y+2],'r');
@@ -159,7 +157,7 @@ void test_pose_tuile_histo(void){
     CU_ASSERT_EQUAL(g.grid[x+1][y+1],'l');
     CU_ASSERT_EQUAL(g.grid[x+1][y+2],'f');
 
-    pose_tuile(g, t, x, y,&newHlist, rot_90);
+    pose_tuile_histo(g, t, x, y,&newHlist, rot_90);
     CU_ASSERT_EQUAL(g.grid[x][y],'r');
     CU_ASSERT_EQUAL(g.grid[x][y+1],'f');
     CU_ASSERT_EQUAL(g.grid[x+1][y],'u');
@@ -167,7 +165,7 @@ void test_pose_tuile_histo(void){
     CU_ASSERT_EQUAL(g.grid[x+2][y],'v');
     CU_ASSERT_EQUAL(g.grid[x+2][y+1],'p');
 
-    pose_tuile(g, t, x, y,&newHlist, rot_270);
+    pose_tuile_histo(g, t, x, y,&newHlist, rot_270);
     CU_ASSERT_EQUAL(g.grid[x][y],'p');
     CU_ASSERT_EQUAL(g.grid[x][y+1],'v');
     CU_ASSERT_EQUAL(g.grid[x+1][y],'l');
@@ -187,35 +185,42 @@ void test_test_zone_limite(void){
     action ac = init_action(t, coord, orientation);
     CU_ASSERT_EQUAL(test_zone_limite(ac,g),true);
     
-    coord[2] = {99,99};
-    action ac = init_action(t, coord, orientation);
+    coord[0] = 99;
+    coord[1] = 99;
+    ac = init_action(t, coord, orientation);
     CU_ASSERT_EQUAL(test_zone_limite(ac,g),false);
     
-    coord[2] = {0,0};
+    coord[0] = 0;
+    coord[1] = 0;
     orientation = rot_180;
-    action ac = init_action(t, coord, orientation);
+    ac = init_action(t, coord, orientation);
     CU_ASSERT_EQUAL(test_zone_limite(ac,g),true);
     
-    coord[2] = {99,99};
-    action ac = init_action(t, coord, orientation);
+    coord[0] = 99;
+    coord[1] = 99;
+    ac = init_action(t, coord, orientation);
     CU_ASSERT_EQUAL(test_zone_limite(ac,g),false);
     
-    coord[2] = {0,0};
+    coord[0] = 0;
+    coord[1] = 0;
     orientation = rot_90;
-    action ac = init_action(t, coord, orientation);
+    ac = init_action(t, coord, orientation);
     CU_ASSERT_EQUAL(test_zone_limite(ac,g),true);
     
-    coord[2] = {99,99};
-    action ac = init_action(t, coord, orientation);
+    coord[0] = 99;
+    coord[1] = 99;
+    ac = init_action(t, coord, orientation);
     CU_ASSERT_EQUAL(test_zone_limite(ac,g),false);
     
-    coord[2] = {0,0};
+    coord[0] = 0;
+    coord[1] = 0;
     orientation = rot_270;
-    action ac = init_action(t, coord, orientation);
+    ac = init_action(t, coord, orientation);
     CU_ASSERT_EQUAL(test_zone_limite(ac,g),true);
     
-    coord[2] = {99,99};
-    action ac = init_action(t, coord, orientation);
+    coord[0] = 99;
+    coord[1] = 99;
+    ac = init_action(t, coord, orientation);
     CU_ASSERT_EQUAL(test_zone_limite(ac,g),false);
     
     lib_grille(&g);
@@ -233,7 +238,7 @@ void test_village_ville(void){
     int coord[2] = {0,0};
     int orientation = rot_0;
     action ac = init_action(t, coord, orientation);
-    CU_ASSERT_EQUAL(village_ville(grille g),6);
+    CU_ASSERT_EQUAL(village_ville(g),6);
     
     lib_grille(&g);
 }
@@ -247,8 +252,9 @@ void test_posable(void){
     action ac = init_action(t, coord, orientation);
     CU_ASSERT_EQUAL(posable(g, t, coord[0], coord[1], orientation),1);
     
-    coord[2] = {99,99};
-    action ac = init_action(t, coord, orientation);
+    coord[0] = 99;
+    coord[1] = 99;
+    ac = init_action(t, coord, orientation);
     CU_ASSERT_EQUAL(posable(g, t, coord[0], coord[1], orientation),0);
     
 }
