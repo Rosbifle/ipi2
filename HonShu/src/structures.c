@@ -261,7 +261,7 @@ int ret_last_tuil(grille g, hlist hist ,int sz, enum pos rot_a){
     pop(&hist);
     g=init_grid(sz);
     while (hist->next != NULL){
-        pose_tuile(g,(hist->Play).t,hist->Play.coord[1],hist->Play.coord[2], rot_a);
+        pose_tuile(g,(hist->Play).t,hist->Play.coord[0],hist->Play.coord[1], rot_a);
         hist=hist->next;
     }
     return 0;
