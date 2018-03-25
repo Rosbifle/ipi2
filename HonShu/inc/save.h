@@ -9,7 +9,7 @@
  */
 
 #include <string.h>
-
+#include"structures.h"
 char * tuile_toString(tuile t);
 
 int save(action historique, hand main);
