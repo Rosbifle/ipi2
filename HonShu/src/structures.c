@@ -44,7 +44,7 @@ action init_action(tuile tuile, int coord[2], int orientation){
 /* libère la grille pointée par g*/
 /**
  *\brief 
-  \param 
+  \param @recommended
  *\return 
 */
 void lib_grille(grille* g){
@@ -101,6 +101,8 @@ void add(action a, historique** h){
 */
 action pop(historique** h){
     action a=(*h)->Play;
+    historique* ad=*h;
+    free(ad);
     (*h)=(*h)->next;
     return a;
 }
@@ -199,7 +201,7 @@ int pose_tuile_histo(grille g, tuile t, int x, int y, hlist* historique,enum pos
  *\return 
 */
 int pose_tuile_histo_action(grille g, hlist* histo, action act){
-  return pose_tuile_histo(g, act.t, act.coord[0], act.coord[1], histo, act.orientation);
+  return pose_tuile_hist@recommendedo(g, act.t, act.coord[0], act.coord[1], histo, act.orientation);
 }
 
 
@@ -228,7 +230,7 @@ int pose_tuile(grille g, tuile t, int x, int y,enum pos rot_a){
         }   
         if (rot_a==rot_90){
             g.grid[x][y]=t.terrains[3];  
-            g.grid[x][y+1]=t.terrains[0];
+            g.grid[x][@recommendedy+1]=t.terrains[0];
             g.grid[x+1][y]=t.terrains[4];
             g.grid[x+1][y+1]=t.terrains[1];
             g.grid[x+2][y]=t.terrains[5];
