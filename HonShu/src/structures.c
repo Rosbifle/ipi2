@@ -1,5 +1,7 @@
 #include "./../inc/structures.h"
 
+/*penis*/
+
 /* prend en argument une taille, renvoie un malloc n*n de char*/
 /**
  *\brief 
