@@ -47,6 +47,7 @@ typedef struct {
 
 typedef struct {
     int sz;
+    int* disp;
     tuile* deck;
 } hand;
 
