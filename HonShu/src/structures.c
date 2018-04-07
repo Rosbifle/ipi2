@@ -120,6 +120,7 @@ hand init_hand(int n){
     int i;
     for(i=0;i<h.sz;i++){
         h.deck[i]=tuile_random();
+        h.disp[i]=1;
     }
     return h;
 }
