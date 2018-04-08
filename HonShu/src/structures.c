@@ -263,9 +263,12 @@ int ret_last_tuil(grille g, hlist hist ,int sz, enum pos rot_a){
     lib_grille(&g);
     pop(&hist);
     g=init_grid(sz);
+    invhist=init_historique; 
     while (hist->next != NULL){
-        pose_tuile(g,(hist->Play).t,hist->Play.coord[0],hist->Play.coord[1], rot_a);
-        hist=hist->next;
+        add(pop(&hist),&(invhist));
+    }
+    while (invhist->next != NULL){
+        pose_tuile_hist(g,(invhist->Play).t,invhist->Play.coord[0],invhist->Play.coord[1], rot_a);
     }
     return 0;
 }
